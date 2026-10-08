@@ -41,6 +41,15 @@ jobs:
         with:
           gradle-version: '8.7'
 
+      - name: Verify search engine URLs
+        shell: bash
+        run: |
+          if grep -Fq '](https://' app/src/main/java/com/fastbrowser/net/MainActivity.java; then
+            echo "Invalid Markdown-style URL found in MainActivity.java"
+            exit 1
+          fi
+          grep -Fq 'https://www.google.com/search?q=' app/src/main/java/com/fastbrowser/net/MainActivity.java
+
       - name: Build release APK
         run: gradle --no-daemon :app:assembleRelease
 
