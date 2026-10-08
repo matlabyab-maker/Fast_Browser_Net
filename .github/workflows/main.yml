@@ -41,19 +41,11 @@ jobs:
         with:
           gradle-version: '8.7'
 
-      - name: Repair accidental Markdown URLs
+      - name: Verify search engine URLs
         shell: bash
         run: |
-          python3 - <<'PYFIX'
-          from pathlib import Path
-          import re
-          p = Path('app/src/main/java/com/fastbrowser/net/MainActivity.java')
-          s = p.read_text(encoding='utf-8')
-          s = re.sub(r'\"\[([^\"]+)\\]\((https?://[^)]+)\\)\"', r'\"\2\"', s)
-          s = re.sub(r'\[([^]]+)\]\((https?://[^)]+)\)', r'\2', s)
-          p.write_text(s, encoding='utf-8')
-          PYFIX
           grep -Fq 'https://www.google.com/search?q=' app/src/main/java/com/fastbrowser/net/MainActivity.java
+          grep -Fq 'https://www.bing.com/search?q=' app/src/main/java/com/fastbrowser/net/MainActivity.java
           grep -Fq 'ST — Real tunnel / proxy connection' app/src/main/java/com/fastbrowser/net/MainActivity.java
           if grep -Fq '](https://' app/src/main/java/com/fastbrowser/net/MainActivity.java; then
             echo 'Invalid Markdown-style URL remains in MainActivity.java'
