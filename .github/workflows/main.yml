@@ -49,6 +49,7 @@ jobs:
             exit 1
           fi
           grep -Fq 'https://www.google.com/search?q=' app/src/main/java/com/fastbrowser/net/MainActivity.java
+          grep -Fq 'ST — Real tunnel / proxy connection' app/src/main/java/com/fastbrowser/net/MainActivity.java
 
       - name: Build release APK
         run: gradle --no-daemon :app:assembleRelease

@@ -15,3 +15,14 @@
 - آیکون اختصاصی Fast Browser Net.
 
 نکته: WebView عمومی Android API مستقیمی برای اعمال DNS سفارشی مستقل از سیستم ندارد؛ بنابراین DNS در تنظیمات نگهداری می‌شود و برای تونل/DNS واقعی باید روش سرویس VPN یا سرور تونل مشخص شود. دکمه VPN تنظیمات واقعی Android را باز می‌کند و قابلیت ساخت VPN را جعل نمی‌کند.
+
+## ST — ارتباط واقعی Proxy/Tunnel
+در بخش **Setups → ST** امکان تعریف یک نقطه اتصال واقعی فراهم شده است:
+- HTTP/HTTPS Proxy یا SOCKS5 Proxy
+- Server / Host و Port
+- Connect / Disconnect
+- Test connection برای HTTP/HTTPS Proxy
+- ذخیره تنظیمات ST
+- اعمال Proxy واقعی WebView از طریق Android WebView ProxyController (API 29+)
+
+ST خودش یک سرور تونل ایجاد نمی‌کند؛ برای اتصال واقعی باید Host/Port متعلق به یک Proxy/Tunnel مجاز و قابل دسترس وارد شود. این بخش برای دورزدن هزینه یا محدودیت اپراتور طراحی نشده است.
